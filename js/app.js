@@ -31,21 +31,18 @@ function shuffle(array) {
   const allCards = document.querySelectorAll('.card');
   console.log(allCards);
 
-  function respondToTheCLick(event){
-    const targetEvent = event.target;
-    if (targetEvent.classList.contains('card')){
-      console.log("A card was clicked.")
-
-    }
-  }
-
   for (i = 0; i < allCards.length; i++) {
-   allCards[i].addEventListener('click', respondToTheCLick)
+   allCards[i].addEventListener('click', displaySymbol)
   }
  // *  - display the card's symbol (put this functionality in another function that you call from this one)
- function displaySymbol(){
-   const dispSymbol = document.querySelector('.card')
- }
+function displaySymbol(event){
+  const targetEvent = event.target;
+  if (targetEvent.classList.contains('card')){
+    console.log("A card was clicked.")
+    targetEvent.classList.toggle('show');
+    targetEvent.classList.toggle('open');
+  }
+}
  // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  // *  - if the list already has another card, check to see if the two cards match
  // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
