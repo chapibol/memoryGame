@@ -3,12 +3,13 @@ HELP: https: //www.youtube.com/watch?v=oECVwum-7Zc
   // * Create a list that holds all of your cards
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+  /*
+   * Display the cards on the page
+   *   - shuffle the list of cards using the provided "shuffle" method below
+   *   - loop through each card and create its HTML
+   *   - add each card's HTML to the page
+   */
+
 
 function randomDeck() {
   const list = document.querySelector('.deck');
@@ -16,28 +17,26 @@ function randomDeck() {
   // console.log(shufDeck);
   for (i = 0; i < shufDeck.length; i++) {
     list.appendChild(shufDeck[i]);
-    // if (shufDeck[i].classList.contains('show')){
-    //   shufDeck[i].classList.remove('show');
-    //   shufDeck[i].classList.remove('open');
-    // }
-
-
   }
-  // console.log(list);
   const doc = list.getElementsByClassName("show");
   const docArray = Array.from(doc);
-  console.log(doc.length)
-  if (docArray.length > 0){
-    for (i = 0; i < docArray.length; i++){
+  // console.log(doc.length)
+  if (docArray.length > 0) {
+    for (i = 0; i < docArray.length; i++) {
       docArray[i].classList.toggle("show");
       docArray[i].classList.toggle("open");
       docArray[i].classList.remove("match");
     }
   }
+  //Resets move counter
+  const moveCounts = document.querySelector('.moves');
+  moveCountNum = Number(moveCounts.innerHTML);
+  moveCounts.innerHTML = 0;
+  time = 0;
 }
 randomDeck();
 
-//Restart button
+//Restart button calls randomDeck function
 
 const restart = document.querySelector('.restart');
 
@@ -80,6 +79,7 @@ function toggleAndAddCard() {
     if (openCards.length === 2) {
       // console.log("2 cards");
       checkMatch();
+
     }
   }
 }
@@ -109,6 +109,7 @@ function checkMatch() {
   } else {
     removeCards();
   }
+  starCount();
   moveCount();
 }
 
@@ -130,9 +131,53 @@ function removeCards() {
 }
 // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 function moveCount() {
-  const moveCount = document.querySelector('.moves');
-  moveCountNum = Number(moveCount.innerHTML);
+  const moveCounts = document.querySelector('.moves');
+  moveCountNum = Number(moveCounts.innerHTML);
   moveCountNum++;
-  moveCount.innerHTML = moveCountNum;
+  moveCounts.innerHTML = moveCountNum;
 }
+//Adjusts the star counter
+function starCount() {
+  if (moveCountNum === 15 || moveCountNum === 25) {
+    removeStar();
+  }
+}
+//Remove a star
+function removeStar() {
+  const stars = document.querySelectorAll('.fa-star')
+  for (i = 0; i < stars.length; i++) {
+    if (stars[i].style.display !== 'none') {
+      stars[i].style.display = 'none';
+      break;
+    }
+  }
+}
+
+//timer
+time = 1;
+
+function startTimer() {
+  let clock = setInterval(() => {
+    showTime();
+    time++;
+    console.log(time);
+  }, 1000);
+
+}
+startTimer();
+
+function showTime(){
+  const timer = document.querySelector('.timer');
+  const min = Math.floor(time / 60);
+  const sec = time % 60;
+  if (sec < 10){
+    timer.innerHTML = min + ":0" + sec;
+  }
+  else{
+    timer.innerHTML = min + ":" + sec;
+  }
+}
+
+
+
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)

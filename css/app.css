@@ -26,6 +26,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: -10;
+    position: relative;
 }
 
 h1 {
@@ -107,3 +109,58 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/* .modalHeading{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  left: 39.5%;
+  top: 20%;
+  background: #ffffff;
+}
+.stats{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  left: 40%;
+  top: 33%;
+  width: 500px;
+  height: 200px;
+}
+.modalStar, .moves, .time {
+  font-size: 30px;
+}
+.heading{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100px;
+  width: 100%;
+  border-bottom: 1px solid gray;
+}
+.exit{
+  position: relative;
+  left: 27%;
+  top: 10%;
+  height: 20px;
+}
+.modalButtons{
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  position: absolute;
+  top: 50%;
+  left: 48%;
+}
+.restartButton{
+  width: 60px;
+  height: 48px;
+}
+
+.hidden{
+  display: none;
+} */
