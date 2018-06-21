@@ -16,12 +16,6 @@ function randomDeck() {
   // console.log(shufDeck);
   for (i = 0; i < shufDeck.length; i++) {
     list.appendChild(shufDeck[i]);
-    // if (shufDeck[i].classList.contains('show')){
-    //   shufDeck[i].classList.remove('show');
-    //   shufDeck[i].classList.remove('open');
-    // }
-
-
   }
   // console.log(list);
   const doc = list.getElementsByClassName("show");
@@ -34,6 +28,11 @@ function randomDeck() {
       docArray[i].classList.remove("match");
     }
   }
+  //Resets move counter
+  const moveCounts = document.querySelector('.moves');
+  moveCountNum = Number(moveCounts.innerHTML);
+  moveCounts.innerHTML = 0;
+  time = 0;
 }
 randomDeck();
 
@@ -110,6 +109,7 @@ function checkMatch() {
     removeCards();
   }
   moveCount();
+  starCount();
 }
 
 // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
@@ -135,4 +135,47 @@ function moveCount() {
   moveCountNum++;
   moveCount.innerHTML = moveCountNum;
 }
+
+//Adjusts the star counter
+function starCount() {
+  if (moveCountNum === 15 || moveCountNum === 25) {
+    removeStar();
+  }
+}
+//Remove a star
+function removeStar() {
+  const stars = document.querySelectorAll('.fa-star')
+  for (i = 0; i < stars.length; i++) {
+    if (stars[i].style.display !== 'none') {
+      stars[i].style.display = 'none';
+      break;
+    }
+  }
+}
+
+//timer
+time = 1;
+
+function startTimer() {
+  let clock = setInterval(() => {
+    showTime();
+    time++;
+    console.log(time);
+  }, 1000);
+
+}
+startTimer();
+
+function showTime(){
+  const timer = document.querySelector('.timer');
+  const min = Math.floor(time / 60);
+  const sec = time % 60;
+  if (sec < 10){
+    timer.innerHTML = min + ":0" + sec;
+  }
+  else{
+    timer.innerHTML = min + ":" + sec;
+  }
+}
+
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
