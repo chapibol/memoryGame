@@ -22,7 +22,7 @@
         		<li><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves">0</span> Moves
+        	<span class="moveCount">0</span> Moves
           <span class="timer">0:00</span>
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -80,7 +80,22 @@
             </li>
         </ul>
     </div>
-
+    <div class="hidden modalBackground">
+        <div class="modalHeading">
+          <div class="heading">
+            <h1>Completed!</h1>
+            <button class="exit">Close</button>
+          </div>
+        </div>
+        <div class="stats">
+            <span class="modalStar">Stars: </span>
+            <span class="moves">Moves: </span>
+            <span class="time">Time: </span>
+        </div>
+        <div class="modalButtons">
+          <button class="restartButton">Restart?</button>
+        </div>
+      </div>
     <script src="js/app.js"></script>
 </body>
 </html>
