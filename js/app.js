@@ -4,6 +4,9 @@
    let openCards = [];
    let time = 1;
    let runTime;
+   const moveCounts = document.querySelector('.moveCount');
+   let moveCountNum = Number(moveCounts.innerHTML);
+
 
 //This function takes each element in the shuffled list and adds it to the list constant
 function randomDeck() {
@@ -11,7 +14,7 @@ function randomDeck() {
   const list = document.querySelector('.deck');
   const shufDeck = shuffle(Array.from(document.querySelectorAll('.card')));
   // console.log(shufDeck);
-  for (i = 0; i < shufDeck.length; i++) {
+  for (let i = 0; i < shufDeck.length; i++) {
     list.appendChild(shufDeck[i]);
   }
   // console.log(list);
@@ -20,15 +23,14 @@ function randomDeck() {
   // console.log(doc.length)
   //Flips the cards back so they're face down by toggling open and show and removing match
   if (docArray.length > 0) {
-    for (i = 0; i < docArray.length; i++) {
+    for (let i = 0; i < docArray.length; i++) {
       docArray[i].classList.remove("show");
       docArray[i].classList.remove("open");
       docArray[i].classList.remove("match");
     }
   }
   //Resets move counter
-  const moveCounts = document.querySelector('.moveCount');
-  moveCountNum = Number(moveCounts.innerHTML);
+
   moveCounts.innerHTML = 0;
   //Resets global variables time counter (starts timer only at first click) and matchNum (resets number of pairs)
   time = 0;
@@ -37,8 +39,8 @@ function randomDeck() {
   matchNum = 0;
   openCards = [];
   //Resets star counter
-  const stars = document.querySelectorAll('.fa-star')
-  for (i = 0; i < stars.length; i++) {
+  const stars = document.querySelectorAll('.fa-star');
+  for (let i = 0; i < stars.length; i++) {
     stars[i].style.display = '';
   }
 }
@@ -47,9 +49,9 @@ randomDeck();
 //Restart button at the top
 const restart = document.querySelector('.restart');
 //when restart is clicked, random deck called to randomize deck and reset variables
-restart.addEventListener('click', randomDeck)
+restart.addEventListener('click', randomDeck);
 // when restart is clicked, stopTimer is called to stop the timer
-restart.addEventListener('click', stopTimer)
+restart.addEventListener('click', stopTimer);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -72,7 +74,7 @@ function shuffle(array) {
 // * set up the event listener for a card. If a card is clicked:
 const allCards = document.querySelectorAll('.card');
 // Main part where toggleAndAddCard is kicked off for each element if it is clicked
-for (i = 0; i < allCards.length; i++) {
+for (let i = 0; i < allCards.length; i++) {
   allCards[i].addEventListener('click', toggleAndAddCard);
 }
 
@@ -154,8 +156,8 @@ function removeCards() {
 // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 function moveCount() {
   const moveCount = document.querySelector('.moveCount');
-  const moveCountModal = document.querySelector('.moves')
-  moveCountNum = Number(moveCount.innerHTML);
+  const moveCountModal = document.querySelector('.moves');
+
   moveCountNum++;
   moveCount.innerHTML = moveCountNum;
   //Increment the moves on the modal at the end
@@ -170,8 +172,8 @@ function starCount() {
 }
 //Remove a star from view
 function removeStar() {
-  const stars = document.querySelectorAll('.fa-star')
-  for (i = 0; i < stars.length; i++) {
+  const stars = document.querySelectorAll('.fa-star');
+  for (let i = 0; i < stars.length; i++) {
     if (stars[i].style.display !== 'none') {
       stars[i].style.display = 'none';
       break;
@@ -214,17 +216,16 @@ function openModal() {
   modal.classList.toggle('hidden');
 }
 const timer = document.querySelector('.timer');
-
 //Returns the number of stars at the end of the game as an integer
 function starModalCount() {
   const numStars = document.querySelectorAll('.stars li i');
   let starCounter = 0;
-  for (i = 0; i < numStars.length; i++) {
+  for (let i = 0; i < numStars.length; i++) {
     if (numStars[i].style.display !== 'none') {
       starCounter++;
     }
   }
-  numStarsModal = document.querySelector('.modalStar');
+  let numStarsModal = document.querySelector('.modalStar');
   numStarsModal.innerHTML = "Stars: " + starCounter;
 }
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
