@@ -1,18 +1,13 @@
-HELP: https: //www.youtube.com/watch?v=oECVwum-7Zc
+//Globals
+   let counter = 0;
+   let matchNum = 0;
+   let openCards = [];
+   let time = 1;
+   let runTime;
 
-  // * Create a list that holds all of your cards
-
-
-  /*
-   * Display the cards on the page
-   *   - shuffle the list of cards using the provided "shuffle" method below
-   *   - loop through each card and create its HTML
-   *   - add each card's HTML to the page
-   */
-  counter = 0;
-matchNum = 0;
 //This function takes each element in the shuffled list and adds it to the list constant
 function randomDeck() {
+  // console.log("calling randomDeck");
   const list = document.querySelector('.deck');
   const shufDeck = shuffle(Array.from(document.querySelectorAll('.card')));
   // console.log(shufDeck);
@@ -22,12 +17,12 @@ function randomDeck() {
   // console.log(list);
   const doc = list.getElementsByClassName("show");
   const docArray = Array.from(doc);
-  console.log(doc.length)
+  // console.log(doc.length)
   //Flips the cards back so they're face down by toggling open and show and removing match
   if (docArray.length > 0) {
     for (i = 0; i < docArray.length; i++) {
-      docArray[i].classList.toggle("show");
-      docArray[i].classList.toggle("open");
+      docArray[i].classList.remove("show");
+      docArray[i].classList.remove("open");
       docArray[i].classList.remove("match");
     }
   }
@@ -38,7 +33,9 @@ function randomDeck() {
   //Resets global variables time counter (starts timer only at first click) and matchNum (resets number of pairs)
   time = 0;
   counter = 0;
+  // console.log("This is counter: " +counter);
   matchNum = 0;
+  openCards = [];
   //Resets star counter
   const stars = document.querySelectorAll('.fa-star')
   for (i = 0; i < stars.length; i++) {
@@ -88,13 +85,14 @@ function toggleAndAddCard() {
     // console.log("A card was clicked.")
     counter++;
     //This counter is to ensure that the timer only starts at the first card being clicked
-    console.log(counter);
+    // console.log(counter);
     if (counter === 1) {
       startTimer();
     }
     displaySymbol(targetEvent);
     addCardToOpenCards(targetEvent);
     // If there are two open cards, it will check if they match
+    // console.log(openCards);
     if (openCards.length === 2) {
       checkMatch();
     }
@@ -106,7 +104,7 @@ function displaySymbol(event) {
   event.classList.toggle('open');
 }
 // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-let openCards = [];
+
 //Pushes the open card to the openCards array
 function addCardToOpenCards(event) {
   if (event.classList.contains('open')) {
@@ -123,7 +121,7 @@ function checkMatch() {
     doMatch();
   } else {
     //flips cards over again
-    removeCards();
+    setTimeout(removeCards, 1000);
   }
   //increases move and star counter
   moveCount();
@@ -138,7 +136,7 @@ function doMatch() {
   // Reset open card array so it includes a new pair of cards
   openCards = [];
   matchNum++;
-  console.log("This is the matchNum: " + matchNum)
+  // console.log("This is the matchNum: " + matchNum)
   if (matchNum === 8) {
     stopTimer();
     endGame();
@@ -182,9 +180,6 @@ function removeStar() {
 }
 
 //Start timer by setting an interval
-time = 1;
-let runTime;
-
 function startTimer() {
   runTime = setInterval(() => {
     displayTime();
@@ -234,7 +229,7 @@ function starModalCount() {
 }
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 function endGame() {
-  console.log(matchNum);
+  // console.log(matchNum);
   starModalCount();
   openModal();
 }
